@@ -1,0 +1,62 @@
+[workspace]
+members = [
+    "crates/ghostflow-core",
+    "crates/ghostflow-schema", 
+    "crates/ghostflow-engine",
+    "crates/ghostflow-nodes",
+    "crates/ghostflow-cli",
+    "crates/ghostflow-server",
+    "crates/ghostflow-api",
+    "crates/ghostflow-ui",
+    "crates/ghostflow-jarvis"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["GhostKellz"]
+repository = "https://github.com/ghostkellz/ghostflow"
+
+[workspace.dependencies]
+# Core dependencies
+tokio = { version = "1.40", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Database
+sqlx = { version = "0.8", features = ["runtime-tokio-native-tls", "postgres", "uuid", "chrono", "migrate"] }
+
+# Web/API
+axum = "0.7"
+tower = "0.5"
+tower-http = { version = "0.5", features = ["cors"] }
+
+# Async/concurrency
+async-trait = "0.1"
+futures = "0.3"
+
+# CLI
+clap = { version = "4.0", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Leptos (Web UI)
+leptos = { version = "0.6", features = ["nightly"] }
+leptos_axum = { version = "0.6" }
+leptos_router = { version = "0.6" }
+leptos_meta = { version = "0.6" }
+
+# WebSocket
+tokio-tungstenite = "0.24"
+
+# Serialization for API
+serde_with = "3.0"

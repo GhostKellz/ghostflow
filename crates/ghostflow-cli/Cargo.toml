@@ -1,0 +1,31 @@
+[package]
+name = "ghostflow-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "gflow"
+path = "src/main.rs"
+
+[[bin]]
+name = "simple_flow"
+path = "src/examples/simple_flow.rs"
+
+[dependencies]
+ghostflow-schema = { path = "../ghostflow-schema" }
+ghostflow-core = { path = "../ghostflow-core" }
+ghostflow-engine = { path = "../ghostflow-engine" }
+ghostflow-nodes = { path = "../ghostflow-nodes" }
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+tokio.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+uuid.workspace = true
+chrono.workspace = true

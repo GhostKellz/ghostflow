@@ -1,0 +1,18 @@
+[package]
+name = "ghostflow-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+ghostflow-schema = { path = "../ghostflow-schema" }
+uuid.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+sqlx.workspace = true

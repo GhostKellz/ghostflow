@@ -1,0 +1,22 @@
+[package]
+name = "ghostflow-nodes"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+ghostflow-schema = { path = "../ghostflow-schema" }
+ghostflow-core = { path = "../ghostflow-core" }
+tokio.workspace = true
+async-trait.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+
+# HTTP client for HTTP Request node
+reqwest = { version = "0.12", features = ["json"] }

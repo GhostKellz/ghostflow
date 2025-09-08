@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ghostflow
+      POSTGRES_PASSWORD: ghostflow
+      POSTGRES_DB: ghostflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ghostflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ghostflow
+      MINIO_ROOT_PASSWORD: ghostflow123
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # For CPU-only, comment out deploy section above
+
+  ghostflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://ghostflow:ghostflow@postgres/ghostflow
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ghostflow
+      MINIO_SECRET_KEY: ghostflow123
+      OLLAMA_HOST: http://ollama:11434
+      RUST_LOG: info
+    ports:
+      - "3000:3000"  # API
+      - "8080:8080"  # UI
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config:ro
+    networks:
+      - ghostflow-network
+
+  # Development-only services
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    networks:
+      - ghostflow-network
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+  minio_data:
+  ollama_data:
+
+networks:
+  ghostflow-network:
+    driver: bridge
