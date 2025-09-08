@@ -208,7 +208,7 @@ impl Node for OllamaNode {
         }
 
         let ollama_response: OllamaResponse = response.json().await
-            .map_err(|e| GhostFlowError::SerializationError(e))?;
+            .map_err(|e| GhostFlowError::NetworkError(e.to_string()))?;
 
         Ok(serde_json::json!({
             "model": ollama_response.model,
@@ -332,7 +332,7 @@ impl Node for OllamaEmbeddingsNode {
             .map_err(|e| GhostFlowError::NetworkError(e.to_string()))?;
 
         let embeddings: EmbeddingsResponse = response.json().await
-            .map_err(|e| GhostFlowError::SerializationError(e))?;
+            .map_err(|e| GhostFlowError::NetworkError(e.to_string()))?;
 
         Ok(serde_json::json!({
             "embeddings": embeddings.embedding,

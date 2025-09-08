@@ -8,7 +8,8 @@ members = [
     "crates/ghostflow-server",
     "crates/ghostflow-api",
     "crates/ghostflow-ui",
-    "crates/ghostflow-jarvis"
+    "crates/ghostflow-jarvis",
+    "crates/ghostllm-sys"
 ]
 resolver = "2"
 
@@ -60,3 +61,4 @@ tokio-tungstenite = "0.24"
 
 # Serialization for API
 serde_with = "3.0"
+

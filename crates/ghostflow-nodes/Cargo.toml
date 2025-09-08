@@ -9,6 +9,7 @@ repository.workspace = true
 [dependencies]
 ghostflow-schema = { path = "../ghostflow-schema" }
 ghostflow-core = { path = "../ghostflow-core" }
+ghostllm-sys = { path = "../ghostllm-sys" }
 tokio.workspace = true
 async-trait.workspace = true
 serde.workspace = true

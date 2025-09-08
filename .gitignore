@@ -2,6 +2,43 @@
 Cargo.lock
 **/*.rs.bk
 
+# Zig build artifacts
+zig-out/
+zig-cache/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# GhostLLM FFI artifacts
+crates/ghostllm-sys/target/
+**/libghostllm.a
+**/ghostllm_stub.c
+
+# Model files (large binaries)
+*.gguf
+*.ggml
+*.bin
+models/
+
+# Testing artifacts
+testing/*/target/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Added by cargo
 #
