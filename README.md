@@ -1,8 +1,10 @@
 # GhostFlow 👻
 
 <div align="center">
-  
-**Open-Source AI Orchestration Platform**  
+
+![GhostFlow Logo](assets/logo/ghostflow-icon.png)
+
+**Open-Source AI Orchestration Platform**
 *The DeepSeek to n8n's OpenAI - Local-first, Developer-focused, Rust-powered*
 
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange?logo=rust)](https://www.rust-lang.org)
